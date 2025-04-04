@@ -1,0 +1,6 @@
+
+
+llamafactory-cli train quest/full/llama3_8b1b_full_reward.yaml 
+llamafactory-cli train qflow/rm/quest/full/llama3_8b1b_full_reward.yaml 
+
+llamafactory-cli train qflow/rm/train_configs/math/full/llama3_8b8b_full_reward_math_cot.yaml

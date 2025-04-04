@@ -1,0 +1,41 @@
+model_name_or_path: allenai/OLMo-7B-0724-Instruct-hf
+### method
+stage: rm
+do_train: true
+finetuning_type: lora
+lora_target: all
+deepspeed: examples/deepspeed/ds_z3_config.json
+lora_rank: 32
+### model
+
+dataset: gsm8k_olmo_128_4ep
+template: olmo
+cutoff_len: 1024
+max_samples: 300000
+overwrite_cache: true
+preprocessing_num_workers: 16
+
+### output
+output_dir: saves/olmo/lora/reward4e-5
+logging_steps: 1
+save_steps: 500
+plot_loss: true
+overwrite_output_dir: true
+report_to: wandb
+
+### train
+per_device_train_batch_size: 2
+gradient_accumulation_steps: 32
+learning_rate: 1.0e-5
+num_train_epochs: 1.0
+lr_scheduler_type: linear
+weight_decay: 0.0
+warmup_ratio: 0.03
+bf16: true
+ddp_timeout: 180000000
+
+### eval
+val_size: 0.05
+per_device_eval_batch_size: 4
+eval_strategy: steps
+eval_steps: 5

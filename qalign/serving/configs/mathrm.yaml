@@ -1,0 +1,9 @@
+# qflow/rm/artifacts/llama3/8b8b/mathcotfix/full/reward
+
+script_type: quest.serving.reward_server
+args:
+  reward_type: value
+  reward_model_path: /gscratch/ark/graf/quest-rlhf/qflow/rm/artifacts/llama3/8b8b/mathcotnewextractmath14325/full/reward
+  reward_device: 0
+  reward_device_count: ${DEVICE_COUNT}
+  dtype: bfloat16

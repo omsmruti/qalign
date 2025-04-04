@@ -1,0 +1,46 @@
+### model
+model_name_or_path: meta-llama/Llama-3.1-8B-Instruct
+flash_attn: fa2
+#attn_implementation: eager
+### method
+stage: rm
+do_train: true
+finetuning_type: full
+deepspeed: qflow/rm/train_configs/deepspeed/ds_z3_config.json
+save_safetensors: False
+
+### dataset
+dataset_dir: qflow/rm/data/
+dataset: cotnewextractmath14325llama-factory_math_llama-3.1-8b-instruct_128_1_train
+
+#eval_dataset: gsm8k_llama3.1-8B_test
+template: llama3
+cutoff_len: 1024
+max_samples: 300000
+overwrite_cache: true
+preprocessing_num_workers: 16
+
+### output
+output_dir: qflow/rm/artifacts/llama3/8b8b/mathcotnewextractmath14325/full/reward
+logging_steps: 1
+save_steps: 500
+plot_loss: true
+overwrite_output_dir: true
+report_to: wandb
+
+### train
+per_device_train_batch_size: 1
+gradient_accumulation_steps: 32
+learning_rate: 1.0e-5
+num_train_epochs: 1.0
+lr_scheduler_type: linear
+weight_decay: 0.0
+warmup_ratio: 0.03
+bf16: true
+ddp_timeout: 180000000
+
+### eval
+val_size: 0.05
+per_device_eval_batch_size: 2
+eval_strategy: steps
+eval_steps: 5
