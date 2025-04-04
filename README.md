@@ -27,7 +27,7 @@ This project relies strongly on the following external libraries:
 ```bash
 pip install quest-decoding
 pip install expkit-core
-pip install literegistry
+pip install literegistry 
 ```
 
 Install the required packages:
@@ -81,7 +81,7 @@ Replicating the work:
 
 ## <div align="center">Quick Start</div>
 
-This guide will help you get started with running QAlign.
+This guide will help you get started running QAlign.
 
 ## Basic Usage
 
@@ -90,7 +90,7 @@ import os
 from quest.core import Quest
 from quest.reward.model import ContextualRewardModel, ValueHead
 from quest.proposal import RLHFSuffixProposal
-from quest.model import VLLM
+from quest.model.vllm import VLLM
 
 # Model configuration
 model_path = "allenai/Llama-3.1-Tulu-3-8B-SFT"
