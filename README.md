@@ -19,13 +19,15 @@ Increasing test-time computation has emerged as a promising direction for improv
 -----
 ## <div align="center">Dependencies</div>
 
-This project relies on the following external libraries:
+This project relies strongly on the following external libraries:
 - [deepspin/quest-decoding](https://github.com/deepspin/quest-decoding)
-- [goncalofaria/expkit](https://github.com/goncalofaria/expkit-core)
+- [goncalorafaria/expkit](https://github.com/goncalorafaria/expkit-core)
+- [goncalorafaria/literegistry](https://github.com/goncalorafaria/literegistry)
 
 ```bash
 pip install quest-decoding
 pip install expkit-core
+pip install literegistry
 ```
 
 Install the required packages:
