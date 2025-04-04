@@ -1,8 +1,0 @@
-script_type: quest.serving.reward_server
-args:
-  reward_type: qe
-  reward_model_path: "Unbabel/XCOMET-XL" 
-  reward_model_batch_size: 64
-  reward_device: 0
-  reward_device_count: ${DEVICE_COUNT}
-  dtype: bfloat16

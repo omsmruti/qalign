@@ -1,4 +1,0 @@
-script_type: resume_experiment_remote
-args:
-  experiment_name: ${EXPERIMENT_NAME}
-  save_path: ${BASE_DIR}

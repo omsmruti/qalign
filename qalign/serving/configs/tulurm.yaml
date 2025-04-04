@@ -1,8 +1,0 @@
-script_type: quest.serving.reward_server
-args:
-  reward_type: contextual
-  reward_model_path: allenai/Llama-3.1-Tulu-3-8B-RM
-  reward_model_batch_size: 64
-  reward_device: 0
-  reward_device_count: ${DEVICE_COUNT}
-  dtype: bfloat16
