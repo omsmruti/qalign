@@ -143,9 +143,9 @@ chain_outputs = chain.run(
 )
 
 # Print the accepted outputs
-for output in chain_outputs[0]["outputs"]
+print(f"Original prompt: {chain_outputs[0]['input']['prompt']}")
+for output in chain_outputs[0]["outputs"]:
    if output["accept"]: 
-      print(f"Original prompt: {output['prompt']}")
       print(f"Response: {output['text']}")
       print("-" * 50)
 
