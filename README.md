@@ -12,45 +12,62 @@ Increasing test-time computation has emerged as a promising direction for improv
 
 
 -----
-## <div align="center">Documentation</div>
+## <div align="center">Dependencies</div>
 
-TBD
+This project relies on the following external libraries:
+- [deepspin/quest-decoding](https://github.com/deepspin/quest-decoding)
+- [goncalofaria/expkit](https://github.com/goncalofaria/expkit-core)
 
-We heavily relly on deepspin/quest-decoding and  goncalofaria/expkit.
+```bash
+pip install quest-decoding
+pip install expkit-core
+```
+
+Install the required packages:
+```bash
+pip install -r requirements.txt
+```
 
 -----
-## <div align="center">Quick Start Examples</div>
+## <div align="center">Reproducing the work</div>
 
 Replicating the work: 
 
-* create configs for general experiments and task
-```bash
-scripts/create_all_general_experiments.sh
-```
-```bash
-scripts/create_all_task_experiments.sh
-```
-* run those locally
-```bash
-scripts/run_local_experiments.sh
-```
-* run those remote
-```bash
-scripts/run_remote_experiments.sh
-```
-* compare responses against gt answers
-```bash
-scripts/run_eval_experiment.sh
-```
-* evaluate reward model for ancestral predictions ( remote by default )
-```bash
-scripts/run_rm_eval.sh
-```
-* run WMV BON MV final prediction methods
-```bash
-scripts/run_pred.sh
-```
+### Experiment Setup
+1. **Create Configuration Files**
+   ```bash
+   # Create configs for general experiments
+   scripts/create_all_general_experiments.sh
+   
+   # Create configs for task-specific experiments
+   scripts/create_all_task_experiments.sh
+   ```
 
+### Running Experiments
+2. **Execute Experiments**
+   ```bash
+   # Run experiments locally
+   scripts/run_local_experiments.sh
+   
+   # Run experiments on remote server
+   scripts/run_remote_experiments.sh
+   ```
+
+### Evaluation & Analysis
+3. **Evaluate Results**
+   ```bash
+   # Compare responses against ground truth answers
+   scripts/run_eval_experiment.sh
+   
+   # Evaluate reward model for ancestral predictions (remote by default)
+   scripts/run_rm_eval.sh
+   ```
+
+4. **Generate Final Predictions**
+   ```bash
+   # Run WMV, BON, and MV final prediction methods
+   scripts/run_pred.sh
+   ```
 
 
 -----
