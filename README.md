@@ -134,7 +134,7 @@ chain = QAlign(
     beta=1.0,  # Controls exploration vs exploitation
 )
 
-# Run the optimization
+# Run
 chain_outputs = chain.run(
     steps=10,  # Number of steps
     use_tqdm=True,  # Show progress bar
