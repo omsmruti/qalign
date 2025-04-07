@@ -89,7 +89,7 @@ This guide will help you get started running QAlign.
 import os
 from quest.core import Quest
 from quest.reward.model import ContextualRewardModel, ValueHead
-from quest.proposal import RLHFSuffixProposal
+from quest.qalign import QAlign
 from quest.model.vllm import VLLM
 
 # Model configuration
@@ -127,12 +127,10 @@ data_batch = [
 ]
 
 # Create markov chain
-chain = Quest(
+chain = QAlign(
     input_data=data_batch,
-    proposal=RLHFSuffixProposal(
-        model=model,
-        reward=reward,
-    ),
+    model=model,
+    reward=reward,
     beta=1.0,  # Controls exploration vs exploitation
 )
 
