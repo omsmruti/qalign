@@ -2,7 +2,7 @@
 
 Gonçalo Faria, Noah A. Smith
 
-**Paper**: tbd
+**Paper**: https://arxiv.org/abs/2504.03790
 
 **TL;DR:** QAlign is a new test-time alignment approach that improves language model performance by using Markov chain Monte Carlo methods.
 
