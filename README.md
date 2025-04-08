@@ -161,14 +161,14 @@ professional support requests please send an [e-mail](mailto:goncalofaria.resear
 ## <div align="center">Citation</div>
 
 ````
-@misc{faria2024sample,
-      title={Sample, Don't Search: Rethinking Test-Time Alignment for Language Models},
-      author={Gon{\c{c}}alo R. A. Faria and Noah Smith},
-      year={2024},
-      eprint={2024.xxxxx},
+@misc{faria2025sampledontsearchrethinking,
+      title={Sample, Don't Search: Rethinking Test-Time Alignment for Language Models}, 
+      author={Gonçalo Faria and Noah A. Smith},
+      year={2025},
+      eprint={2504.03790},
       archivePrefix={arXiv},
       primaryClass={cs.CL},
-      note={Website: \url{https://www.questdecoding.com/qalign}}
-    }
+      url={https://arxiv.org/abs/2504.03790}, 
+}
 ````
 
