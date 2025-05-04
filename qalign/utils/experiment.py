@@ -20,10 +20,6 @@ from qalign.utils.data import get_data_iterable
 from quest.utils.list import chunked
 
 
-## literegistry
-from literegistry import RegistryClient, FileSystemKVStore
-
-
 def create_experiment(
     save_path: str,
     variant: str,
@@ -145,21 +141,9 @@ def create_vllm_model(
         **extra_args,
     }
 
-    if remote:
-        from quest.model.remote import RemoteVLLM
+    from quest.model.vllm import VLLM
 
-        registry = RegistryClient(
-            store=FileSystemKVStore("/gscratch/ark/graf/registry"),
-            max_history=3600,
-            cache_ttl=60,
-            service_type="model_path",
-        )
-
-        return RemoteVLLM(registry=registry, **model_args)
-    else:
-        from quest.model.vllm import VLLM
-
-        return VLLM(**model_args)
+    return VLLM(**model_args)
 
 
 def process_batch_outputs(
@@ -275,38 +259,22 @@ def run_quest(
 
     reward_type = experiment.meta["reward_type"]
 
-    if remote:
-        registry = RegistryClient(
-            store=FileSystemKVStore("/gscratch/ark/graf/registry"),
-            max_history=3600,
-            cache_ttl=60,
-            service_type="model_path",
-        )
-
-        reward = RemoteReward(
-            registry=registry,
+    if reward_type == "contextual":
+        reward = ContextualRewardModel(
             model_path=experiment.meta["reward_model_path"],
-            reward_type=reward_type,
             # batch_size=reward_model_batch_size,
+            device=reward_device,
+            device_count=reward_device_count,
         )
-
+    elif reward_type == "value":
+        reward = ValueHead(
+            model_path=experiment.meta["reward_model_path"],
+            # batch_size=reward_model_batch_size,
+            device=reward_device,
+            device_count=reward_device_count,
+        )  # sentiment model.
     else:
-        if reward_type == "contextual":
-            reward = ContextualRewardModel(
-                model_path=experiment.meta["reward_model_path"],
-                # batch_size=reward_model_batch_size,
-                device=reward_device,
-                device_count=reward_device_count,
-            )
-        elif reward_type == "value":
-            reward = ValueHead(
-                model_path=experiment.meta["reward_model_path"],
-                # batch_size=reward_model_batch_size,
-                device=reward_device,
-                device_count=reward_device_count,
-            )  # sentiment model.
-        else:
-            raise ValueError(f"Unknown reward type: {reward_type}")
+        raise ValueError(f"Unknown reward type: {reward_type}")
 
     # Process each batch
     for data_batch in data_batches:
@@ -351,38 +319,22 @@ def run_quest_bootstrap(
 
     reward_type = experiment.meta["reward_type"]
 
-    if remote:
-        registry = RegistryClient(
-            store=FileSystemKVStore("/gscratch/ark/graf/registry"),
-            max_history=3600,
-            cache_ttl=60,
-            service_type="model_path",
-        )
-
-        reward = RemoteReward(
-            registry=registry,
+    if reward_type == "contextual":
+        reward = ContextualRewardModel(
             model_path=experiment.meta["reward_model_path"],
-            reward_type=reward_type,
             # batch_size=reward_model_batch_size,
+            device=reward_device,
+            device_count=reward_device_count,
         )
-
+    elif reward_type == "value":
+        reward = ValueHead(
+            model_path=experiment.meta["reward_model_path"],
+            # batch_size=reward_model_batch_size,
+            device=reward_device,
+            device_count=reward_device_count,
+        )  # sentiment model.
     else:
-        if reward_type == "contextual":
-            reward = ContextualRewardModel(
-                model_path=experiment.meta["reward_model_path"],
-                # batch_size=reward_model_batch_size,
-                device=reward_device,
-                device_count=reward_device_count,
-            )
-        elif reward_type == "value":
-            reward = ValueHead(
-                model_path=experiment.meta["reward_model_path"],
-                # batch_size=reward_model_batch_size,
-                device=reward_device,
-                device_count=reward_device_count,
-            )  # sentiment model.
-        else:
-            raise ValueError(f"Unknown reward type: {reward_type}")
+        raise ValueError(f"Unknown reward type: {reward_type}")
 
     for data_batch in chunked(
         experiment.meta["bootstrap"], experiment.get("batch_size")

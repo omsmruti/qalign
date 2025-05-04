@@ -15,9 +15,6 @@ from expkit.storage import DiskStorage
 ## qalign
 from qalign.utils.eval import *
 
-## literegistry
-from literegistry import RegistryClient, FileSystemKVStore
-
 
 def main(
     base_dir="remote-outputs-llama/",
@@ -59,36 +56,6 @@ def main(
     elif reward_model_path == "ifeval":
         ps_eval = IFEval()
 
-    elif remote:
-
-        if value_head:
-            reward_type = "value"
-        elif context:
-            reward_type = "contextual"
-        else:
-            reward_type = "reward"
-
-        registry = RegistryClient(
-            store=FileSystemKVStore("/gscratch/ark/graf/registry"),
-            max_history=3600,
-            cache_ttl=60,
-            service_type="model_path",
-        )
-
-        reward = RemoteReward(
-            model_path=reward_model_path,
-            registry=registry,
-            reward_type=reward_type,
-            # batch_size=batch_size,
-            # max_parallel_requests=32,
-            batch_size=32,
-            max_parallel_requests=64,
-        )
-        ps_eval = RewardEval(
-            reward=reward,
-            n=n,
-            chunk_size=256,
-        )
     elif value_head:
 
         reward = ValueHead(
